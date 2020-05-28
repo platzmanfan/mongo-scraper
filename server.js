@@ -16,7 +16,7 @@ var cheerio = require ("cheerio");
 
 // our models
 
-// var db = require("./models");
+var db = require("./models");
 
 var PORT = 3000;
 
