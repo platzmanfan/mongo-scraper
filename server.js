@@ -39,7 +39,7 @@ app.engine(
   app.set("view engine", "handlebars");
   
   require("./routes/htmlRoutes")(app);
-mongoose.connect("mongodb://localhost/scraperdb", {useNewUrlParser:true});
+mongoose.connect("mongodb://localhost/scraper1db", {useNewUrlParser:true});
 
 
 app.listen(PORT ,function(){
