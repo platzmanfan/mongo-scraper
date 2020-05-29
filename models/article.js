@@ -8,9 +8,13 @@ var ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    link:{
+    url:{
         type: String,
         required: true
+    },
+    paragraph:{
+        type:String
+        
     }
 });
 
