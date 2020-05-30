@@ -5,12 +5,6 @@ var db = require("../models");
 
   // Load index page
   module.exports = function(app){
-
-
-  
-  // app.get("/", function(req,res){
-  //   res.render("index")
-  // })
   
   app.get("/all", function(req,res){
     axios.get("https://news.yahoo.com/").then(function(response){
@@ -53,13 +47,24 @@ app.get("/", function(req, res) {
     // Grab every document in the Articles collection
     db.article.find({})
       .then(function(dbArticle) {
-        const retrievedArticles = dbArticle;
-          var handlebarsObject = {
-        // If we were able to successfully find Articles, send them back to the client
-           scrape: dbArticle
+       
+        var handlebarsObject = {
+          scrape:  dbArticle.map(function(article){
+          
+            return {
+              _id:article.id,
+              title:article.title,
+              url:article.url,
+              paragraph:article.paragraph,
+              saved:article.saved
+  
+            }
             
-            };
+          })  
+        }
+          
           res.render("index", handlebarsObject);   
+     
           
       })
       .catch(function(err) {

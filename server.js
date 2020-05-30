@@ -7,7 +7,7 @@ var exphbs = require("express-handlebars");
 
 var mongoose = require("mongoose");
 
-
+var logger = require('morgan')
 var PORT = 3000;
 
 // initialize
@@ -15,7 +15,7 @@ var PORT = 3000;
 var app = express();
 
 // middleware
-
+app.use(logger('dev'));
 app.use(express.urlencoded({ extended:true}));
 app.use(express.json());
 app.use(express.static("public"));
@@ -30,7 +30,6 @@ app.engine(
   
   require("./routes/routes")(app);
  
-
 
   var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperYahoodb";
 

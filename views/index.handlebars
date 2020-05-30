@@ -33,57 +33,68 @@
   <br>
 
 </div>
-  <p class="text-center text-white"><a href="#">Go Back To Saved Articles</a></p>
+  <p class="text-center text-white"><a href="/saved">Go Back To Saved Articles</a></p>
 
   <div class="container-fluid" id="articles"></div>
   
-    {{#if scrape}}
-     {{#each scrape}}
-   
-     
-  
-   
-<div class="card text-center">
-  
-  <div class="card-body">
-      
-    <h5 class="card-title">{{this.title}}TITLE</h5>
-    <p class="card-text">{{this.dataValues.paragraph}} PARAGRAPH</p>
-    <a href="#" class="btn btn-primary">{{this.dataValues.url}} URL</a>
-         <button id="{{this.dataValues._id}}" class="btn btn-danger save-btn">Save Article</button>
-    {{/each}}
-   
-    <div class="alert alert-warning alert-dismissible bg-warning text-center text-dark" id="footer" role="alert">
-  <strong>Holy guacamole!</strong> Uh Oh. Looks like we don't have any new articles.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-   {{/if}}
-  </div>
-  <div class="card-footer text-muted">
-    2 days ago
-  </div>
-</div>
-  <script>
+    <div class=row>
+        <div class="col-12">
+            
+            {{#each scrape}}
+            
+                <div class="card w-90">
+                    <div class="card-header text-white bg-primary">
+                        <a href={{ this.url}} target="_blank" class="text-white">
+                            <h2>{{ this.title}}</h2>
+                        </a>
+                    </div>
+                   
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{this.paragraph}}
+                        </p>
+                        <button id="{{this._id}}" class="btn btn-danger save-btn">Save Article</button>
+                    </div>
+                </div>
+                
+              
+            {{/each}}
+           
+                <div class="card text-white bg-warning w-90 p-1">
+                    <div class="card-body text-center">
+                        Uh oh. Looks like we don't have any new articles
+                    </div>
+                </div>
+           
+        </div>
+    </div>
+ <script type="text/javascript">
 
-$(document).ready(function() {
-$(document).on("click","#clear",function(){
-  alert("click")
+$(document).ready(function(){
 
-});
-$("#btnScraper").on("click", function(){
-  event.preventDefault();
-  var thisId = $(this).attr("data-id");
-
-  $.ajax({
-    method: "GET",
-    url: "/articles/" +thisId
+  $("#saved").on("click", function(){
+    alert("click")
   })
-  .then(function(data){
-    console.log(data)
-  })
+ $(".save-btn").click(function(event) {
+        event.preventDefault();
+        const button = $(this);
+        const id = button.attr("id");
+        $.ajax(`/save/${id}`, {
+            type: "PUT"
+        }).then(function() {
+            const alert = `
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            Your note has been saved!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>`
+            button.parent().append(alert);
+            }
+        );
 });
-});
+})
   </script>
-  <script src="https://code.jquery.com/jquery.js"></script>
+
+
+  

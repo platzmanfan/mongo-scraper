@@ -17,3 +17,51 @@
     </ul>
   </div>
 </nav>
+<div class=row>
+        <div class="col-12">
+            {{#each scrape}}
+            {{#if saved}}
+                <div class="card w-90">
+                    <div class="card-header text-white bg-primary">
+                        <a href={{this.url}} target="_blank" class="text-white">
+                            <h2>{{this.title}}</h2>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {{this.paragraph}}
+                        </p>
+                        <button data="{{this._id}}" class="btn btn-info note-btn">Article Notes</button>
+                        <button data="{{this._id}}" class="btn btn-danger delete-btn">Delete From Saved</button>
+                    </div>
+                </div>
+                {{/if}}
+            {{/each}}
+        </div>
+    </div>
+    <script>
+      $(document).ready(function () {
+        
+         $(".delete-btn").click(function (event) {
+        event.preventDefault();
+        const id = $(this).attr("data");
+        $.ajax(`/remove/${id}`, {
+            type: "PUT"
+        }).then(function(){
+            location.reload();
+        })
+    });
+
+          $(document).on('click', '.btn-deletenote', function (){
+            event.preventDefault();
+            console.log($(this).attr("data"))
+            const id = $(this).attr("data");
+            console.log(id);
+            $.ajax(`/note/${id}`, {
+                type: "DELETE"
+            }).then(function () {
+                $('#note-modal').modal('toggle');
+            });
+    });
+      })
+    </script>
