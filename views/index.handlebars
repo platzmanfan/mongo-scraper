@@ -12,8 +12,8 @@
         <a class="nav-link" href="/saved">Saved Articles</a>
       </li>
       <li class="nav-item">
-      <button class="btn btn-primary bg-danger text-white" role="button"><a href="/scrape">Scrape New Articles</a></button>
-    <button class="btn btn-primary bg-danger text-white" type="submit">Clear Articles</button>
+      <button class="btn btn-primary bg-danger text-white" id="btnScraping" role="button"><a href="/all">Scrape New Articles</a></button>
+    <button class="btn btn-primary bg-danger text-white" id="clear" type="submit">Clear Articles</button>
       </li>
     </ul>
   </div>
@@ -27,12 +27,7 @@
     <h1 class="display-4 text-white text-left">Yahoo news Scraper Edition</h1>
   </div>
 </div>
-<div class="alert alert-warning alert-dismissible bg-warning text-center text-dark" role="alert">
-  <strong>Holy guacamole!</strong> Uh Oh. Looks like we don't have any new articles.
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
+
 <div class="alert alert-warning bg-primary pb-4 text-center text-white" role="alert">
   <strong>What would you like to do?!</strong>
   <br>
@@ -42,14 +37,29 @@
 
   <div class="container-fluid" id="articles"></div>
   
+    {{#if scrape}}
+     {{#each scrape}}
+   
+     
+  
+   
 <div class="card text-center">
-  <div class="card-header">
-    Featured
-  </div>
+  
   <div class="card-body">
-    <h5 class="card-title">Special title treatment</h5>
-    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+      
+    <h5 class="card-title">{{this.title}}TITLE</h5>
+    <p class="card-text">{{this.dataValues.paragraph}} PARAGRAPH</p>
+    <a href="#" class="btn btn-primary">{{this.dataValues.url}} URL</a>
+         <button id="{{this.dataValues._id}}" class="btn btn-danger save-btn">Save Article</button>
+    {{/each}}
+   
+    <div class="alert alert-warning alert-dismissible bg-warning text-center text-dark" id="footer" role="alert">
+  <strong>Holy guacamole!</strong> Uh Oh. Looks like we don't have any new articles.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+   {{/if}}
   </div>
   <div class="card-footer text-muted">
     2 days ago
@@ -57,11 +67,23 @@
 </div>
   <script>
 
-    $.getJSON("/articles", function(data) {
-  // For each one
-  for (var i = 0; i < 20; i++) {
-    // Display the apropos information on the page
-    $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].url + "<br />" +data[i].paragraph + "</p>");
-  }
+$(document).ready(function() {
+$(document).on("click","#clear",function(){
+  alert("click")
+
+});
+$("#btnScraper").on("click", function(){
+  event.preventDefault();
+  var thisId = $(this).attr("data-id");
+
+  $.ajax({
+    method: "GET",
+    url: "/articles/" +thisId
+  })
+  .then(function(data){
+    console.log(data)
+  })
+});
 });
   </script>
+  <script src="https://code.jquery.com/jquery.js"></script>

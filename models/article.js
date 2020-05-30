@@ -6,16 +6,32 @@ var ArticleSchema = new Schema({
 
     title: {
         type: String,
-        required: true
+        required: true,
+        allowProtoMethodsByDefault:true,
+        allowedProtoProperties:true
     },
     url:{
         type: String,
         required: true
+        
     },
     paragraph:{
         type:String,
-        required:true
+        required:false
         
+        
+    },
+    saved:
+    {
+        type:Boolean,
+        default:false,
+        required:false
+        
+    },
+    note:{
+        type: [{type: Schema.Types.ObjectId, ref: 'Note'}],
+        allowedProtoProperties:true,
+        allowProtoMethodsByDefault:true
     }
 });
 

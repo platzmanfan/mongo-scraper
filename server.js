@@ -7,16 +7,6 @@ var exphbs = require("express-handlebars");
 
 var mongoose = require("mongoose");
 
-// scraping tools needed
-
-var axios = require("axios");
-
-
-var cheerio = require ("cheerio");
-
-// our models
-
-var db = require("./models");
 
 var PORT = 3000;
 
@@ -38,10 +28,23 @@ app.engine(
   );
   app.set("view engine", "handlebars");
   
-  require("./routes/htmlRoutes")(app);
-mongoose.connect("mongodb://localhost/scraper1db", {useNewUrlParser:true});
+  require("./routes/routes")(app);
+ 
 
 
+  var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperYahoodb";
+
+  mongoose.connect(MONGODB_URI,function(err){
+      if (err){
+          console.log(Err)
+      }
+      else{
+          console.log("mongoose succesfull")
+      }
+  });
+
+
+  
 app.listen(PORT ,function(){
     console.log("APP RUNNING ON PORT " + PORT);
 });
