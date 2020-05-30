@@ -57,14 +57,11 @@ app.get("/", function(req, res) {
               url:"https://news.yahoo.com" + article.url,
               paragraph:article.paragraph,
               saved:article.saved
-  
             }
             
           })  
-        }
-          
-          res.render("index", handlebarsObject);   
-     
+        }    
+          res.render("index", handlebarsObject);  
           
       })
       .catch(function(err) {
@@ -137,7 +134,7 @@ app.get("/", function(req, res) {
 
   ///route for grabbing a specific article by id
 app.get("/articles/:id" , function (req,res){
-  db.article.find({_id: req.params.id})
+  db.article.findOne({_id: req.params.id})
   .populate("note")
   .then(function(dbArticle){
     res.json(dbArticle)

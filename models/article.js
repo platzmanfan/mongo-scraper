@@ -7,8 +7,7 @@ var ArticleSchema = new Schema({
     title: {
         type: String,
         required: true,
-        allowProtoMethodsByDefault:true,
-        allowedProtoProperties:true
+       
     },
     url:{
         type: String,
@@ -30,8 +29,7 @@ var ArticleSchema = new Schema({
     },
     note:{
         type: [{type: Schema.Types.ObjectId, ref: 'Note'}],
-        allowedProtoProperties:true,
-        allowProtoMethodsByDefault:true
+       
     }
 });
 
