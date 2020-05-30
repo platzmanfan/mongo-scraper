@@ -54,7 +54,7 @@ app.get("/", function(req, res) {
             return {
               _id:article.id,
               title:article.title,
-              url:article.url,
+              url:"https://news.yahoo.com" + article.url,
               paragraph:article.paragraph,
               saved:article.saved
   
@@ -82,7 +82,7 @@ app.get("/", function(req, res) {
           return {
             _id:article.id,
             title:article.title,
-            url:article.url,
+            url:"https://news.yahoo.com"+article.url,
             paragraph:article.paragraph,
             saved:article.saved
 
