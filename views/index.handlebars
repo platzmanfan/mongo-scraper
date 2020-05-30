@@ -14,6 +14,7 @@
       <li class="nav-item">
       <button class="btn btn-primary bg-danger text-white" id="btnScraping" role="button"><a href="/all">Scrape New Articles</a></button>
     <button class="btn btn-primary bg-danger text-white" id="clear" type="submit">Clear Articles</button>
+    
       </li>
     </ul>
   </div>
@@ -39,12 +40,12 @@
   
     <div class=row>
         <div class="col-12">
-            
+          
             {{#each scrape}}
             
                 <div class="card w-90">
                     <div class="card-header text-white bg-primary">
-                        <a href={{ this.url}} target="_blank" class="text-white">
+                        <a href='<%#String.Concat("https://yahoo.news.com",{{ this.url}}")%>' target="_blank" class="text-white">
                             <h2>{{ this.title}}</h2>
                         </a>
                     </div>
@@ -57,15 +58,16 @@
                     </div>
                 </div>
                 
-              
+            
             {{/each}}
+            
            
                 <div class="card text-white bg-warning w-90 p-1">
                     <div class="card-body text-center">
                         Uh oh. Looks like we don't have any new articles
                     </div>
                 </div>
-           
+            
         </div>
     </div>
  <script type="text/javascript">

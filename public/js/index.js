@@ -1,6 +1,7 @@
 $(document).ready(function () {
     // event handler for deleting a note
-    $(".delete-btn").click(function (event) {
+    $(".btn-deletenote").click(function (event) {
+        
         event.preventDefault();
         const id = $(this).attr("data");
         $.ajax(`/remove/${id}`, {
@@ -35,7 +36,7 @@ $(document).ready(function () {
     });
 
     // $('.btn-deletenote').click(function (event) {})
-    $(document).on('click', '.btn-deletenote', function (){
+    $(document).on('click', '.delete-btn', function (){
             event.preventDefault();
             console.log($(this).attr("data"))
             const id = $(this).attr("data");
@@ -63,7 +64,7 @@ $(document).ready(function () {
 
     $(".save-btn").click(function(event) {
         event.preventDefault();
-        saved = true;
+        
         const button = $(this);
         const id = button.attr("id");
         $.ajax(`/save/${id}`, {

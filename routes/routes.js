@@ -75,9 +75,20 @@ app.get("/", function(req, res) {
 
   app.get("/saved", function(req, res) {
     db.article.find({saved:true})
-    .then(function(retrievedArticles){
-      let handlebarsObject = {
-        scrape: retrievedArticles
+    .then(function(dbArticle){
+      var handlebarsObject = {
+        scrape:  dbArticle.map(function(article){
+        
+          return {
+            _id:article.id,
+            title:article.title,
+            url:article.url,
+            paragraph:article.paragraph,
+            saved:article.saved
+
+          }
+          
+        })  
       }
       res.render("saved" , handlebarsObject);
     })
