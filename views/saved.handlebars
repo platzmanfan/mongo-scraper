@@ -12,7 +12,7 @@
         <a class="nav-link" href="/saved">Saved Articles</a>
       </li>
       <li class="nav-item">
-      <button class="btn btn-primary bg-primary text-white" role="button">Clear Articles</button>
+      <button class="btn btn-primary bg-primary text-white" role="button" href="/clearSaved">Clear Articles</button>
       </li>
     </ul>
   </div>
@@ -35,13 +35,10 @@
                         <p class="card-text">
                             {{this.paragraph}}
                         </p>
-                        <button data="{{this.body}}" class="btn btn-info note-btn" data-toggle="modal" data-target="#exampleModal">Article Notes</button>
+                        <button data="{{this.note}}" class="btn btn-info note-btn" data-toggle="modal" data-target="#exampleModal">Article Notes</button>
                         <button data="{{this._id}}" class="btn btn-danger delete-btn">Delete From Saved</button>
                     </div>
                 </div>
-                
-
-            
             
         </div>
     </div>
@@ -50,23 +47,24 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" visibility="hidden">
-  <div class="modal-dialog">
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel"> Id of this Article : {{this._id}} </h5>
-         <p class="modal-title" id="exampleModalLabel"> Modal title: {{this.title}}  </p>
+        <h5 class="modal-title" id="exampleModalLabel" >Note For Article<span id="article1-id">Id of this Article : {{this._id}}</span></h5>
+         
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <li class="list-group-item">No notes for this article yet.</li>
-        <textarea placeholder="New Note" rows="4" cols="40"></textarea>
+        <div id="notes"></div>
+        <li class="list-group">No notes for this article yet.</li>
+        <textarea placeholder="New Note" id="article-id" rows="4" cols="40"></textarea>
       </div>
       <div class="modal-footer">
       
-        <button type="button" class="btn btn-primary" id="save-note">Save changes</button>
+        <button type="button" class="btn btn-primary" id="save-note" data-toggle="#exampleModal">Save changes</button>
       </div>
     </div>
   </div>

@@ -131,11 +131,24 @@ app.get("/", function(req, res) {
       res.json(err)
     })
   })
-
+  app.delete("/clearSaved",function(req,res){
+    db.article.deleteMany({"saved":true})
+    .exec(function(err,doc){
+      if(err){
+        console.log(err)
+      }
+      else{
+        console.log("cleared");
+      }
+      res.redirect("/")
+    })
+  });
   ///route for grabbing a specific article by id
 app.get("/articles/:id" , function (req,res){
   db.article.findOne({_id: req.params.id})
-  .populate("note")
+  .populate({path: 'note',
+        model: 'Note'
+})
   .then(function(dbArticle){
     res.json(dbArticle)
   })
