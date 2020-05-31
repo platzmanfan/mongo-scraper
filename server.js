@@ -35,10 +35,7 @@ app.engine(
  
   mongoose.connect(
     process.env.MONGODB_URI ||
-    "mongodb://user1:password1@ds155820.mlab.com:55820/heroku_n09hc9c4",
-    {
-        useMongoClient:true
-    }
+    "mongodb://user1:password1@ds155820.mlab.com:55820/heroku_n09hc9c4"
   );
 
 
