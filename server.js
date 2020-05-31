@@ -32,15 +32,7 @@ app.engine(
  
 
   var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperYahoodb";
-
-  mongoose.connect(MONGODB_URI,function(err){
-      if (err){
-          console.log(Err)
-      }
-      else{
-          console.log("mongoose succesfull")
-      }
-  });
+  mongoose.connect(MONGODB_URI)
 
 
   

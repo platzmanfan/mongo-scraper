@@ -6,7 +6,7 @@ var db = require("../models");
   // Load index page
   module.exports = function(app){
   
-  app.get("/all", function(req,res){
+  app.get("/", function(req,res){
     axios.get("https://news.yahoo.com/").then(function(response){
         var $ = cheerio.load(response.data);
            
@@ -37,7 +37,7 @@ var db = require("../models");
             });
           };
         });
-        res.redirect("/");
+        res.redirect("/all");
     });
    
 });
