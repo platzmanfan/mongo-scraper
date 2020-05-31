@@ -31,8 +31,15 @@ app.engine(
   require("./routes/routes")(app);
  
 
-  var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/scraperYahoodb";
-  mongoose.connect(MONGODB_URI)
+  
+ 
+  mongoose.connect(
+    process.env.MONGODB_URI ||
+    "mongodb://user1:password1@ds155820.mlab.com:55820/heroku_n09hc9c4",
+    {
+        useMongoClient:true
+    }
+  );
 
 
   
